@@ -28,9 +28,9 @@ public class RandomizeStats {
         stats = initialRandomize();
 
         // Balance the stats by changing the random range
-        double str = rStat(stats.get("agl"));
-        double def = rStat(stats.get("str"));
-        double agl = rStat(stats.get("def"));
+        double str = rStat(stats.get("str"), stats.get("agl"));
+        double def = rStat(stats.get("def"), stats.get("str"));
+        double agl = rStat(stats.get("agl"), stats.get("def"));
         
         // replace old stats
         stats.put("str", str);
@@ -68,11 +68,10 @@ public class RandomizeStats {
      * @param dependency
      * @return stat
      */
-    private static double rStat(double dependency){
+    private static double rStat(double stat, double dependency){
         Random r = new Random();
         
         // Randomize stat based on whether dependency is a high or low value
-        double stat = 0;
         if (dependency >= 80.0) {
             stat = 40.0 + r.nextDouble() * (65.0 - 40.0);
         } else if (dependency <= 60.0){
@@ -82,6 +81,11 @@ public class RandomizeStats {
         return stat;
     }
 
+    // public static void main(String[] args){
+    //     Hashtable<String, Double> stats = new Hashtable<String, Double>();
+    //     stats = statRandomizer();
+    //     System.out.println("Stats after balancing: " + stats);
+    // }
 
 
 }
