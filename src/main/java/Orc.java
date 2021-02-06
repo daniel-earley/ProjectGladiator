@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 import java.util.Hashtable;
 
 /**
@@ -113,6 +114,13 @@ public class Orc extends Character{
         }
     }
 
+    public String toString(){
+        return "Name: " + this.getName() + "\n" + "Str: " + this.getStrength()
+        + " Agl: " + this.getAgility() + " Def: " + this.getDefense()
+        + " Hp: " + this.getHealth() + " Luck: " + this.getLuck() 
+        + "\n" + "PowerLvl: " + this.getPowerLevel();        
+    }   
+
     /**
      * based upon all stats, calculate the power level
      * Ideally the perfect orc is 300 power level
@@ -127,7 +135,11 @@ public class Orc extends Character{
         double luckPower = getLuck() * 0.3;
 
         return (int) (statsPower + hpPower + luckPower);
+    }
 
+    public static void main(String[] args){
+        Orc thisOrc = new Orc();
+        System.out.println(thisOrc);
     }
     
 
