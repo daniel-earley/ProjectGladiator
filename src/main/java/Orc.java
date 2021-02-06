@@ -34,6 +34,16 @@ public class Orc extends Character{
         setPowerLevel(calculatePowerLevel());
     }
 
+    public Orc(double str, double agl, double def, double hp, double luck){
+        setName(RandomizeNames.getRandomName());
+        setStrength(str);
+        setAgility(agl);
+        setDefense(def);
+        setHealth(hp);
+        setLuck(luck);
+        setPowerLevel(calculatePowerLevel());
+    }
+
     @Override
     public String getName() {
         return this.name;
@@ -138,7 +148,9 @@ public class Orc extends Character{
 
     public static void main(String[] args){
         Orc thisOrc = new Orc();
+        Orc opOrc = new Orc(100,100,100,300,10);
         System.out.println(thisOrc);
+        System.out.println(opOrc);
     }
     
 
