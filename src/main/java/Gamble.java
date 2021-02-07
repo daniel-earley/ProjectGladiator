@@ -39,6 +39,7 @@ public class Gamble {
         int choice = scan.nextInt();
         System.out.printf("Now enter the amount of money you would like to bet!\n");
         int value = scan.nextInt();
+        scan.close();
         
         // Solidify choice
         switch (choice){
