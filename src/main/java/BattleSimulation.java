@@ -18,7 +18,7 @@ public class BattleSimulation {
      * @param orc1  
      * @param orc2
      */
-    public static void simulation(Orc orc1, Orc orc2){
+    public static Orc simulation(Orc orc1, Orc orc2){
         boolean finished = false;
         int roundCounter = 0;
         while (!finished){
@@ -27,11 +27,11 @@ public class BattleSimulation {
 
             // Check if either orc is dead
             if (orc1.isAlive() == false){
-                System.out.printf("%s has slayn %s!\n%s is victorius!", orc2.getName(), orc1.getName(), orc2.getName());
+                System.out.printf("%s has slayn %s!\n%s is victorius!\n", orc2.getName(), orc1.getName(), orc2.getName());
                 finished = true;
                 break;
             } else if (orc2.isAlive() == false){
-                System.out.printf("%s has slayn %s!\n%s is victorius!", orc1.getName(), orc2.getName(), orc1.getName());
+                System.out.printf("%s has slayn %s!\n%s is victorius!\n", orc1.getName(), orc2.getName(), orc1.getName());
                 finished = true;
                 break;
             }
@@ -51,6 +51,12 @@ public class BattleSimulation {
             System.out.printf("~~~~~~~~~~End of Round %d~~~~~~~~~~\n", roundCounter);
             roundCounter++;
         }
+
+        // Return winner
+        if (orc1.isAlive() == false){
+            return orc2;
+        }
+        return orc1;
     }
 
     /**
