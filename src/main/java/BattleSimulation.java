@@ -62,8 +62,9 @@ public class BattleSimulation {
      */
     public static void attack(Orc orc1, Orc orc2){
         // Calculate the dmg dealt
-        double dmg = Math.abs(orc1.getStrength() - orc2.getDefense());
-
+        double dmg = orc1.getStrength() - (orc2.getDefense()*0.75);
+        if (dmg <= 10) {dmg = 10;}
+        
         // Calculate % chance for orc2 to dodge (A perfect agility and luck stat will allow for 60% dodging)
         double enemyDodge = move(orc2);
 
@@ -77,7 +78,7 @@ public class BattleSimulation {
             System.out.printf("%s dodged %s's attack!\n", orc2.getName(), orc1.getName());
         } else {
             // Attack hit
-            System.out.printf("%s hit %s for %f damage!\n", orc1.getName(), orc2.getName(), dmg);
+            System.out.printf("%s hit %s for %.2f damage!\n", orc1.getName(), orc2.getName(), dmg);
             orc2.setHealth(orc2.getHealth() - dmg);
         }
     }
@@ -95,9 +96,12 @@ public class BattleSimulation {
     public static void counterAttack(Orc orc1, Orc orc2){
         Random r = new Random();
         double percent = r.nextDouble() * 10;
-        double dmg = Math.abs(orc1.getStrength() - orc2.getDefense()) + 10;
+
+        double dmg = orc1.getStrength() - (orc2.getDefense()*0.75) + 10;
+        if (dmg <= 10) {dmg = 20;}
+
         if ((orc1.getLuck()/2)+1 >= percent){
-            System.out.printf("%s counterattacks %s and deals %f damage!\n", orc1.getName(), orc2.getName(), dmg);
+            System.out.printf("%s counterattacks %s and deals %.2f damage!\n", orc1.getName(), orc2.getName(), dmg);
             orc2.setHealth(orc2.getHealth() - dmg);
         }
     }
