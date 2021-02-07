@@ -1,5 +1,4 @@
 import java.util.Random;
-import java.lang.Math;
 /**
  * @author Daniel Earley
  * @version 1.0
