@@ -23,6 +23,9 @@ public class BattleSimulation {
         boolean finished = false;
         int roundCounter = 0;
         while (!finished){
+            
+            System.out.printf("~~~~~~~~~~Begin Round %d~~~~~~~~~~\n", roundCounter);
+
             // Check if either orc is dead
             if (orc1.isAlive() == false){
                 System.out.printf("%s has slayn %s!\n%s is victorius!", orc2.getName(), orc1.getName(), orc2.getName());
@@ -46,7 +49,7 @@ public class BattleSimulation {
                 attack(orc1, orc2);
             }
 
-            System.out.printf("~~~~~~~~~~End of Round %d~~~~~~~~~~\n~~~~~~~~~~Begin Round %d~~~~~~~~~~\n", roundCounter, roundCounter + 1);
+            System.out.printf("~~~~~~~~~~End of Round %d~~~~~~~~~~\n", roundCounter);
             roundCounter++;
         }
     }
@@ -69,7 +72,8 @@ public class BattleSimulation {
         double accuracy = r.nextDouble() * 100.0;
 
         if (accuracy <= enemyDodge){
-            // Attack misses or orc2 dodges
+            // Attack misses or orc2 dodges or orc2 counterattacks
+            counterAttack(orc2, orc1);
             System.out.printf("%s dodged %s's attack!\n", orc2.getName(), orc1.getName());
         } else {
             // Attack hit
@@ -82,14 +86,30 @@ public class BattleSimulation {
         return (orc.getAgility() * 0.5) + orc.getLuck();
     }
 
+    /**
+     * When an orc dodges an attack, there will be a small percent chance that they can counterattack
+     * This percent chance depends on their luck
+     * @param orc1
+     * @param orc2
+     */
+    public static void counterAttack(Orc orc1, Orc orc2){
+        Random r = new Random();
+        double percent = r.nextDouble() * 10;
+        double dmg = Math.abs(orc1.getStrength() - orc2.getDefense()) + 10;
+        if ((orc1.getLuck()/2)+1 >= percent){
+            System.out.printf("%s counterattacks %s and deals %f damage!\n", orc1.getName(), orc2.getName(), dmg);
+            orc2.setHealth(orc2.getHealth() - dmg);
+        }
+    }
+
     // testing
-    // public static void main(String[] args){
-    //     Orc A = new Orc();
-    //     Orc B = new Orc();
+    public static void main(String[] args){
+        Orc A = new Orc(100.0,100.0,100.0,350.0,1);
+        Orc B = new Orc(40,100,100,350,1);
 
-    //     System.out.println(A);
-    //     System.out.println(B);
+        System.out.println(A);
+        System.out.println(B);
 
-    //     simulation(A, B);
-    // }
+        simulation(A, B);
+    }
 }
