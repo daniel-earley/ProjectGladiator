@@ -50,7 +50,7 @@ public class RandomizeStats {
         double str = 40.0 + r.nextDouble() * (100.0 - 40.0);
         double agl = 40.0 + r.nextDouble() * (100.0 - 40.0);
         double def = 40.0 + r.nextDouble() * (100.0 - 40.0);
-        double hp  = 200.0 + r.nextDouble() * (300.0 - 200.0);
+        double hp  = 300.0 + r.nextDouble() * (400.0 - 300.0);
         double luck = 1.0 + r.nextDouble() * (10.0 - 1.0);
         
         Hashtable<String, Double> stats = new Hashtable<String, Double>();
