@@ -2,7 +2,7 @@ import java.util.Hashtable;
 
 /**
  * @author Daniel Earley
- * @version 2.0
+ * @version 3.0
  * @since 2021-02-06
  * Create and initialize Orc Class
  */
@@ -123,11 +123,10 @@ public class Orc extends Character{
         }
     }
 
-    public String toString(){
-        return "Name: " + this.getName() + "\n" + "Str: " + this.getStrength()
-        + " Agl: " + this.getAgility() + " Def: " + this.getDefense()
-        + " Hp: " + this.getHealth() + " Luck: " + this.getLuck() 
-        + "\n" + "PowerLvl: " + this.getPowerLevel();        
+    public String toString(){      
+        return String.format("Name: %s\nStr: %.2f, Agl: %.2f, Def: %.2f, Hp: %.2f, Luck: %.2f\nPowerLevel: %d", 
+                            this.getName(), this.getStrength(), this.getAgility(), this.getDefense(), this.getHealth(), 
+                            this.getLuck(), this.getPowerLevel());
     }   
 
     /**
