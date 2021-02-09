@@ -18,7 +18,7 @@ public class BattleSimulation {
      * @param orc1  
      * @param orc2
      */
-    public static Orc simulation(Orc orc1, Orc orc2){
+    public Orc simulation(Orc orc1, Orc orc2){
         boolean finished = false;
         int roundCounter = 1;
         while (!finished){
@@ -112,13 +112,13 @@ public class BattleSimulation {
     }
 
     // testing
-    public static void main(String[] args){
-        Orc A = new Orc(100.0,100.0,100.0,350.0,1);
-        Orc B = new Orc(40,100,100,350,1);
+    // public static void main(String[] args){
+    //     Orc A = new Orc(100.0,100.0,100.0,350.0,1);
+    //     Orc B = new Orc(40,100,100,350,1);
 
-        System.out.println(A);
-        System.out.println(B);
+    //     System.out.println(A);
+    //     System.out.println(B);
 
-        simulation(A, B);
-    }
+    //     simulation(A, B);
+    // }
 }
