@@ -1,7 +1,7 @@
 import java.util.Random;
 /**
  * @author Daniel Earley
- * @version 1.0
+ * @version 3.0
  * @since 2021-02-06
  * 
  * The purpose of this class is to simulate a fight between 2 Orcs
@@ -20,7 +20,7 @@ public class BattleSimulation {
      */
     public static Orc simulation(Orc orc1, Orc orc2){
         boolean finished = false;
-        int roundCounter = 0;
+        int roundCounter = 1;
         while (!finished){
             
             System.out.printf("~~~~~~~~~~Begin Round %d~~~~~~~~~~\n", roundCounter);
@@ -48,7 +48,7 @@ public class BattleSimulation {
                 attack(orc1, orc2);
             }
 
-            System.out.printf("~~~~~~~~~~End of Round %d~~~~~~~~~~\n", roundCounter);
+            // System.out.printf("~~~~~~~~~~End of Round %d~~~~~~~~~~\n", roundCounter);
             roundCounter++;
         }
 
