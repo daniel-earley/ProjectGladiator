@@ -1,22 +1,40 @@
 public class main {
     public static void main(String[] args){
-        // Orc orcA = new Orc(70,70,70,300,5);
-        // Orc orcB = new Orc(70,70,70,300,5);
+        // Initialize everything
         BattleSimulation bs = new BattleSimulation();
-        Orc orcA = new Orc();
-        Orc orcB = new Orc();
-        Gamble money = new Gamble(orcA, orcB);
-        Player me = new Player("Daniel");
+        Player player = new Player("Daniel");
+        Orc orc1;
+        Orc orc2;
+        Gamble gamble;
+        // Main loop
+        do {
+            // Initialize Orcs and Gambling
+            orc1 = new Orc();
+            orc2 = new Orc();
+            gamble = new Gamble(orc1, orc2);
 
-        // Bet on Orcs
-        money.printOdds(orcA, orcB);
-        money.bet(me);
+            // Print Orc Stats
+            System.out.println("~~~~~~~~~~Presenting Your Fighters!~~~~~~~~~~");
+            System.out.println(orc1);
+            System.out.println(orc2);
+            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+            // Print The Odds
+            gamble.printOdds(orc1, orc2);
 
-        // Run simulation
-        Orc winner = bs.simulation(orcA, orcB);
+            // Place Bets
+            gamble.bet(player);
 
-        // Payout money
-        me.deposit(money.returns(winner));
-        System.out.println(me);
+            // Run Simulation
+            Orc winner = bs.simulation(orc1, orc2);
+
+            // Payout Money
+            player.deposit(gamble.returns(winner));
+            System.out.println("\n~~~~~~~~~~Player stats~~~~~~~~~~~~");
+            System.out.println(player);
+            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+
+        } while (!player.isEmpty());
+        System.out.printf("Sorry %s, but without any money you can't stay here!\n", player.getName());
+
     }
 }
