@@ -1,6 +1,6 @@
 /**
  * @author Daniel Earley
- * @version 1.0
+ * @version 2.0
  * @since 2021-02-06
  * Player class for the user
  */
@@ -23,6 +23,10 @@ public class Player {
 
     // Other Methods
     public int withdraw(int money){
+        if (isEmpty()){
+            System.out.println("No money left in the bank!");
+            return 0;
+        }
         this.money -= money;
         return money;
     }
@@ -40,7 +44,11 @@ public class Player {
     }
 
     public String toString(){
-        String result = "Name: " + name + "\nBank Account: $" + money + "\n";
-        return result;
+        if (isEmpty()){
+            // return "Name: " + name + "\nBank Account: $" + 0 + "\n";
+            return String.format("Name: %s, Bank Account: $%d", name, 0);
+        }
+        
+        return String.format("Name: %s, Bank Account: $%d", name, money);
     }
 }
