@@ -1,7 +1,7 @@
 import java.util.Scanner;
 /**
  * @author Daniel Earley
- * @version 1.0
+ * @version 3.0
  * @since 2021-02-06
  * 
  * The purpose of this class is to create bets
@@ -31,24 +31,72 @@ public class Gamble {
         this.orcName2 = orc2.getName();
     }
 
+    /**
+     * Bet is the function where the player will choose who to bet on and how much.
+     * Choose int_choice_1 or int_choice_2 to bet on
+     * Specify int_value to bet
+     * insufficient answers to will be disregarded and the question asked again
+     * @param player - Needed because this is the player making the bet
+     * Credits to Yassine.b from stack overflow for showing how to clean scanner inputs
+     * link to code: https://stackoverflow.com/a/32593462
+     */
     public void bet(Player player){
         // int value, int choice
-
         Scanner scan = new Scanner(System.in);
-        System.out.printf("Place your bets!\nType 1 if you believe %s will win!\nType 2 if you think %s will be victorius!\n", orcName1, orcName2);
-        int choice = scan.nextInt();
-        System.out.printf("Now enter the amount of money you would like to bet!\n");
-        int value = scan.nextInt();
-        scan.close();
+        int choice = 0;
+        int value = 0;
+        boolean inputCatch = false;
+        do {
+            System.out.printf("Place your bets!\nType 1 if you believe %s will win!\nType 2 if you think %s will be victorius!\n", orcName1, orcName2);
+            if (scan.hasNextInt()){
+                choice = scan.nextInt();
+                if (choice > 2 || choice < 1){
+                    System.out.printf("Sorry, but %d is not a valid option, please try again\n", choice);
+                } else {
+                    // Break the loop
+                    inputCatch = true;
+                    break;
+                }
+            } else {
+                scan.nextLine();
+                System.out.println("Sorry, but that is not a valid option, please try again\n");
+            }
+        } while (!inputCatch);
+        inputCatch = false;
+
+        do {
+            System.out.printf("Now enter the amount of money you would like to bet!\n");
+            if (scan.hasNextInt()){
+                value = scan.nextInt();
+                if (value > player.getmoney()){
+                    System.out.printf("Sorry but you don't have enough money in the bank to bet $%d\n", value);
+                    System.out.printf("Your bank balance is $%d\n", player.getmoney());
+                } else if (value <= 0){
+                    System.out.printf("Sorry but $%d is not a valid $ amount\n", value);
+                } else {
+                    // Break the loop
+                    inputCatch = true;
+                    break;
+                }
+            } else {
+                scan.nextLine();
+                System.out.println("Sorry, but that is not a valid option, please try again\n");
+            }
+        } while (!inputCatch);
+                
         
         // Solidify choice
         switch (choice){
             case 1:
-                System.out.printf("You've bet %d on %s to win!\n", value, orcName1);
+                System.out.printf("You've bet %d on %s to win!\n\n", value, orcName1);
                 break;
             case 2:
-                System.out.printf("You've bet %d on %s to win!\n", value, orcName2);
+                System.out.printf("You've bet %d on %s to win!\n\n", value, orcName2);
                 break;
+        }
+
+        if (player.isEmpty()){
+            scan.close();
         }
 
         // Add money to the pot and solidfy choice
