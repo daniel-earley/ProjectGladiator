@@ -104,6 +104,11 @@ public class Gamble {
         this.choice = choice;
     }
 
+    /**
+     * This function pays the user back based on whether they bet on the winning orc
+     * @param orc - the winning orc
+     * @return integer money paid back to user
+     */
     public int returns(Orc orc){
         // Based on the Winning orc's name
         if (orc.getName() == orcName1) {
@@ -128,6 +133,11 @@ public class Gamble {
         }   
     }
 
+    /**
+     * This function calculates the amount of money owed to the user
+     * based upon the value bet and the odds of winning
+     * @return integer money owed
+     */
     private int payout(){
         int odds = calculateOdds();
         System.out.printf("powerLevel1 = %d, powerLevel2 = %d\n", powerLevel1, powerLevel2);
@@ -177,6 +187,13 @@ public class Gamble {
         }
     }
 
+    /**
+     * Doesn't actually calculate the odds just returns an integer
+     * value based on the powerlevel of the orcs.
+     * The actual calculations happen in other functions that call this one 
+     * based off of the knowing the power dynamic
+     * @return an integer value based on the power level of the orcs
+     */
     public int calculateOdds(){
         if (powerLevel1 > powerLevel2){
            return 1;
